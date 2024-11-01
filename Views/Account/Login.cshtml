@@ -1,4 +1,4 @@
-﻿@model SampleSecureWeb.ViewModels.LoginViewModel
+﻿@model SampleSecureWeb.ViewModel.LoginViewModel
 
 <div class="row">
     <div class="col-lg-4">
@@ -17,23 +17,38 @@
                     <input type="hidden" asp-for="ReturnUrl" />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <input asp-for="Username" class="form-control form-control-user" placeholder="Username" />
+                        <input asp-for="Username" class="form-control form-control-user" 
+                        placeholder="Username" />
                         <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input asp-for="Password" class="form-control form-control-user" placeholder="Password" />
+                        <div class="input-group">
+                            <input asp-for="Password" id="LoginPassword" class="form-control form-control-user" placeholder="Password" type="password" />
+                            <div class="input-group-append">
+                                <button type="button" id="toggleLoginPassword" class="btn btn-secondary">
+                                    👁
+                                </button>
+                            </div>
+                        </div>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
+
+                    <!-- Menampilkan karakter terakhir yang diketik -->
+                    <div id="lastLoginChar" class="text-muted"></div>
                     <div class="form-group">
                         <label asp-for="RememberLogin" class="form-check-label">
                             <input asp-for="RememberLogin" class="form-check-input">
                             <strong>Remember Me</strong>
                         </label>
                     </div>
+
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary btn-user btn-block" value="Login" />
                     </div>
                 </form>
+                <div class="text-center mt-3">
+                    <a asp-action="ChangePassword" asp-controller="Account">Forgot Password? Change it here</a>
+                </div>
             </div>
         </div>
     </div>
@@ -43,4 +58,21 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    
+    <script>
+        // Toggle password visibility
+        document.getElementById('toggleLoginPassword').addEventListener('click', function () {
+            const passwordField = document.getElementById('LoginPassword');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            // Toggle eye icon
+            this.textContent = type === 'password' ? '👁' : '🙈';
+        });
+
+        // Display last typed character
+        document.getElementById('LoginPassword').addEventListener('input', function () {
+            const lastChar = this.value.slice(-1);
+            document.getElementById('lastLoginChar').textContent = `Karakter terakhir: ${lastChar}`;
+        });
+    </script>
 }

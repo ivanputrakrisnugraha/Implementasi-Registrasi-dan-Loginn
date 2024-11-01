@@ -254,3 +254,4 @@ C:\KTI24\KTI\SampleSecureWeb\obj\Debug\net8.0\refint\SampleSecureWeb.dll
 C:\KTI24\KTI\SampleSecureWeb\obj\Debug\net8.0\SampleSecureWeb.pdb
 C:\KTI24\KTI\SampleSecureWeb\obj\Debug\net8.0\SampleSecureWeb.genruntimeconfig.cache
 C:\KTI24\KTI\SampleSecureWeb\obj\Debug\net8.0\ref\SampleSecureWeb.dll
+C:\KTI24\KTI\SampleSecureWeb\obj\Debug\net8.0\SampleSecureWeb.sourcelink.json

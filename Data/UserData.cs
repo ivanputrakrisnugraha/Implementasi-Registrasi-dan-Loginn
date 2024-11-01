@@ -10,12 +10,18 @@ public class UserData : IUser
     {
         _db = db;
     }
+
+    public User GetUserByUsername(string username)
+    {
+        throw new NotImplementedException();
+    }
+
     public User Login(User user)
     {
         var _user = _db.Users.FirstOrDefault(u => u.Username == user.Username);
         if (_user == null)
         {
-            throw new Exception("User not found");
+            throw new Exception("Username not found");
         }
         if (!BCrypt.Net.BCrypt.Verify(user.Password, _user.Password))
         {
@@ -37,5 +43,10 @@ public class UserData : IUser
         {
             throw new Exception(ex.Message);
         }
+    }
+
+    public void UpdatePassword(User user)
+    {
+        throw new NotImplementedException();
     }
 }
